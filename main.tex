@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
+\usepackage{biblatex}
+\addbibresource{references.bib}
 
 \title{2025-tower-paper}
 \author{John Kaushagen}
@@ -10,6 +12,12 @@
 \maketitle
 
 \section{Introduction}
+This paper studies the rate at which measures converge in a tower-like Markov chain \cite{Young1998}.
+Specifically, we investigate polynomial decay of correlations, which arise often in dynamical systems.
+Our main contribution is a sharp first-order bound on the error terms of the renewal measure when delay is present, expanding on the work of Rogozin in \cite{Rogozin1973}., as well as a result giving bounds on the total variation distance.
+We also provide possible refinements to the bound when the delay terms and the renewal rates are of the same order.
+
+
 Just the standard abstract here.
 What has been done before, and what is this related to?
 \begin{itemize}
@@ -40,5 +48,7 @@ What if the returns aren't independent but depend on the section they left from?
 
 \section{Conclusion}
 Summary of what I did, and maybe some future areas to work on.
+
+\printbibliography
 
 \end{document}
