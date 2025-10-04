@@ -1,6 +1,8 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
-\usepackage{biblatex}
+\documentclass[11pt]{article}
+
+\input{tex/packages.tex}
+\input{tex/macros.tex}
+
 \addbibresource{references.bib}
 
 \title{2025-tower-paper}
@@ -42,6 +44,8 @@ I also need to give a proof of the renewal equation with the delay.
 Here, I'll give the proofs of the order estimates for the terms un, Un, Vn, and Rn.
 Split the cases for alpha and beta.
 Give the special case when I have monotonic sequences.
+\input{sections/convergence.tex}
+
 
 \section{Correlation (if I have time)}
 What if the returns aren't independent but depend on the section they left from?

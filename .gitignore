@@ -4,3 +4,14 @@ Old Writing Archive/
 # MacOS file-system stuff
 .DS_Store
 
+# Latex intermediate files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
