@@ -1,0 +1,73 @@
+\begin{theorem}
+    Suppose $P_n = O(n^{-\alpha}\ell_1(n))$ and $u_n = O(n^{-\beta}\ell_2(n))$ where $1 \leq \alpha < \beta$, and $\ell_1$ and $\ell_2$ are two slowly varying functions.
+    If $\alpha = 1$, then
+    \[
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu^2}V_n + o\left(\ell_1^*(n)\right),
+    \]
+    and if $\alpha > 1$, then
+    \[
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu^2}V_n + o(n^{-\alpha+1}\ell_1(n))
+    \]
+    where
+    \[
+        V_n = \begin{cases}
+            O\left(\ell^*_1(n)\right)
+                & \text{if}\ \alpha = 1,\\
+            O\left(n^{-\alpha + 1} \ell_1(n)\right)
+                & \text{if}\ \alpha > 1.
+        \end{cases}
+    \]
+\end{theorem}
+\begin{proof}
+    We recall from Lemma \ref{thm:a_n-decomp} that
+    \[
+       a_n = \frac{1}{\mu}
+           - \frac{1}{\mu}\sum_{k=n+1}^\infty u_k
+           + \frac{1}{\mu^2} \sum_{k=0}^n u_k Q_{n-k}
+           + R_n.
+    \]
+    Since $u_n =  O(n^{-\beta}\ell_2(n))$, and $\beta > 1$, by assumption, we have by Lemma \ref{lemma:rogozin-slow-var-tail} that
+    \[
+        U_n = \sum_{k=n+1}^\infty u_k = O(n^{-\beta+1}\ell_2(n)).
+    \]
+    To bound the $V_n$ terms, we first consider the case when $\alpha = 1$.
+    In this case,
+    since $P_n = O(n^{-\alpha}\ell_1(n))$,
+    we use Lemma \ref{lemma:rogozin-slow-var-tail} to see
+    \[
+        Q_n = \sum_{k=n+1}^\infty P_n = O\left(\sum_{k=n+1}^\infty k^{-1}\ell_1(k)\right) = O(\ell_1^*(n)).
+    \]
+    Using this bound, we from Lemma \ref{lemma:convolution-domination},
+    that
+    \[
+        V_n = \sum_{k=0}^n u_k Q_{n-k} = O(\ell_1^*(n)).
+    \]
+    Lastly, we consider the terms $R_n$.
+    From Rogozin's result in Theorem \ref{theorem:rogozin},
+    we have
+    \[
+        R_n(1) = \begin{cases}
+            O(\ell_1^*(n)) & \text{if}\ \alpha = 1,\\
+            O(n^{-2\alpha+2}\ell_1(n)) & \text{if}\ 1 < \alpha < 2,\\
+            O(n^{-2}\ell_1^-(n)) & \text{if}\ \alpha = 2,\ \text{and}\\
+            O(n^{-\alpha}\ell_1(n)) & \text{if}\ \alpha > 2.
+        \end{cases}
+    \]
+    Let $\gamma = \min(2\alpha-2, \beta)$.
+    Then again from Lemma \ref{lemma:convolution-domination},
+    we see
+    \[
+        R_n = \sum_{k=0}^n u_k R_{n-k}(1) = \begin{cases}
+            O((\ell_1^+(n))^2) & \text{if}\ \alpha = 1,\\
+            O(n^{-\gamma}\ell_1(n)) & \text{if}\ 1 < \alpha < 2,\\
+            O(n^{-2}\ell_1^-(n)) & \text{if}\ \alpha = 2,\\
+            O(n^{-\alpha}\ell_1(n)) & \text{if}\ \alpha > 2.
+        \end{cases}
+    \]
+    In all cases, $R_n = o(\ell_1^+(n))$.
+    Thus we see that $V_n$ in the largest order term,
+    and so
+    \[
+        a_n =  \frac{1}{\lambda} + \frac{1}{\lambda^2}V_n + o\left(\sum_{k=1}^n k^{-1}\ell_1(k)\right).
+    \]
+\end{proof}
