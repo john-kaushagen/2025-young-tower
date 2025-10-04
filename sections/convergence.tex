@@ -19,57 +19,64 @@
     \]
 \end{theorem}
 \begin{proof}
-    We recall from Lemma \ref{thm:a_n-decomp} that
+    Recall the representation of $a_n$ from Lemma \ref{thm:a_n-decomp}:
     \[
        a_n = \frac{1}{\mu}
            - \frac{1}{\mu}\sum_{k=n+1}^\infty u_k
            + \frac{1}{\mu^2} \sum_{k=0}^n u_k Q_{n-k}
            + R_n.
     \]
-    Since $u_n =  O(n^{-\beta}\ell_2(n))$, and $\beta > 1$, by assumption, we have by Lemma \ref{lemma:rogozin-slow-var-tail} that
+    Since $u_n =  O(n^{-\beta}\ell_2(n))$ and $\beta > 1$ by assumption,
     \[
-        U_n = \sum_{k=n+1}^\infty u_k = O(n^{-\beta+1}\ell_2(n)).
+        U_n = \sum_{k=n+1}^\infty u_k = O(n^{-\beta+1}\ell_2(n))
     \]
-    To bound the $V_n$ terms, we first consider the case when $\alpha = 1$.
-    In this case,
-    since $P_n = O(n^{-\alpha}\ell_1(n))$,
-    we use Lemma \ref{lemma:rogozin-slow-var-tail} to see
+    by Lemma \ref{lemma:rogozin-slow-var-tail}.
+
+    We consider the terms $V_n$ and $R_n$ in two separate cases: when $\alpha = 1$ and when $\alpha > 1$.
+
+    \textbf{Case 1: $\alpha = 1$.}
+    In this case, $P_n = O(n^{-1}\ell_1(n))$,
+    so
     \[
-        Q_n = \sum_{k=n+1}^\infty P_n = O\left(\sum_{k=n+1}^\infty k^{-1}\ell_1(k)\right) = O(\ell_1^*(n)).
+        Q_n = \sum_{k=n+1}^\infty P_k = O\left(\sum_{k=n+1}^\infty k^{-1}\ell_1(k)\right) = O(\ell_1^*(n))
     \]
-    Using this bound, we from Lemma \ref{lemma:convolution-domination},
-    that
+    by Lemma \ref{lemma:rogozin-slow-var-tail}.
+    Combing this with the fact that $u_n = O(n^{-\beta}\ell_2(n))$ where $\beta > 1$,
+    we can use Lemma \ref{lemma:convolution-domination} to see that
     \[
         V_n = \sum_{k=0}^n u_k Q_{n-k} = O(\ell_1^*(n)).
     \]
+
     Lastly, we consider the terms $R_n$.
     From Rogozin's result in Theorem \ref{theorem:rogozin},
-    we have
+    we have $r_n(1) = O(\ell_1^*(n))$.
+    Therefore,
     \[
-        R_n(1) = \begin{cases}
-            O(\ell_1^*(n)) & \text{if}\ \alpha = 1,\\
-            O(n^{-2\alpha+2}\ell_1(n)) & \text{if}\ 1 < \alpha < 2,\\
-            O(n^{-2}\ell_1^-(n)) & \text{if}\ \alpha = 2,\ \text{and}\\
-            O(n^{-\alpha}\ell_1(n)) & \text{if}\ \alpha > 2.
-        \end{cases}
+        R_n = \sum_{k=0}^n u_k r_{n-k}O(\ell_1^*(n))
     \]
-    Let $\gamma = \min(2\alpha-2, \beta)$.
-    Then again from Lemma \ref{lemma:convolution-domination},
-    we see
+    again by Lemma \ref{lemma:convolution-domination}.
+
+    Combining these two results,
+    we see that $V_n = O(\ell_1^*(n))$, while $u_n, R_n = o(\ell_1^*(n))$.
+    Thus we have
     \[
-        R_n = \sum_{k=0}^n u_k R_{n-k}(1) = \begin{cases}
-            O((\ell_1^+(n))^2) & \text{if}\ \alpha = 1,\\
-            O(n^{-\gamma}\ell_1(n)) & \text{if}\ 1 < \alpha < 2,\\
-            O(n^{-2}\ell_1^-(n)) & \text{if}\ \alpha = 2,\\
-            O(n^{-\alpha}\ell_1(n)) & \text{if}\ \alpha > 2.
-        \end{cases}
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu^2}V_n + o\left(\ell_1^*(n)\right)
     \]
-    In all cases, $R_n = o(\ell_1^+(n))$.
-    Thus we see that $V_n$ in the largest order term,
-    and so
+    when $\alpha = 1$.
+
+    \textbf{Case 2: $\alpha > 1$.}
+    When $\alpha > 1$, we have $Q_n = O(n^{-\alpha+1}\ell_1(n))$ by Lemma \ref{lemma:rogozin-slow-var-tail},
+    and $r_n = O(n^{-\alpha}\ell_1(n))$ by Theorem \ref{theorem:rogozin}.
+    These two bounds, combined with the fact that $u_n = O(n^{-\beta}\ell_2(n))$, give us
+    $V_n = O(n^{-\alpha+1}\ell_1(n))$ and $R_n = O(n^{-\alpha}\ell_1(n))$ by Lemma \ref{lemma:convolution-domination}.
+    
+    Since $\beta > \alpha$,
+    we have that both $u_n = o(n^{-\alpha+1}\ell_1(n))$ and $R_n = o(n^{-\alpha+1}\ell_1(n))$.
+    Thus the dominating term is $V_n$, and we have
     \[
-        a_n =  \frac{1}{\lambda} + \frac{1}{\lambda^2}V_n + o\left(\sum_{k=1}^n k^{-1}\ell_1(k)\right).
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu^2}V_n + o\left(n^{-\alpha+1}\ell_1(n)\right)
     \]
+    proving the result.
 \end{proof}
 
 The next theorem gives the result when then delay terms $u_n$ dominate the renewal terms $P_n$.
