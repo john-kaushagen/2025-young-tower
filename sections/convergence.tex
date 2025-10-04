@@ -71,3 +71,66 @@
         a_n =  \frac{1}{\lambda} + \frac{1}{\lambda^2}V_n + o\left(\sum_{k=1}^n k^{-1}\ell_1(k)\right).
     \]
 \end{proof}
+
+The next theorem gives the result when then delay terms $u_n$ dominate the renewal terms $P_n$.
+\begin{theorem}
+    \label{theorem:main-beta-lt-alpha}
+    Suppose $P_n = O(n^{-\alpha}\ell_1(n))$
+    and $u_n = O(n^{-\beta}\ell_2(n))$
+    where $1 \leq \beta < \alpha$,
+    and $\ell_1$ and $\ell_2$ are two slowly-varying functions.
+    Then we have the following bounds: if $\beta = 1$, then
+    \[
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu}U_n + o\left(\sum_{k=1}^n k^{-1}\ell_2(k)\right)
+    \]
+    and if $\beta > 1$, then
+    \[
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu} U_n + o(n^{-\beta+1}\ell_2(n))
+    \]
+    where
+    \[
+        U_n = \begin{cases}
+            O\left(\sum_{k=0}^n k^{-1}\ell_1(k)\right)
+                & \text{if}\ \beta = 1,\\
+            O\left(n^{-\alpha + 1} \ell_1(n)\right)
+                & \text{if}\ \beta > 1.
+        \end{cases}
+    \]
+\end{theorem}
+\begin{proof}
+    We recall that the sequences $Q_n$ and $U_n$ are defined as
+    \begin{equation}
+        Q_n = \sum_{k=n+1}^\infty P_k,
+        \text{ and }
+        U_n = \sum_{k=n+1}^\infty u_k.
+    \end{equation}
+    Since $\alpha > 1$, Lemma \ref{lem:sv-tail-rog} gives us the asymptotic bound $Q_n = O(n^{-\alpha + 1}\ell_1(n))$. From the same lemma, we also get the bound
+    \begin{equation}
+        U_n = \begin{cases}
+            O\left(\sum_{k=n}^\infty k^{-1}\ell_2(k)\right) & \text{if } \beta=1,\\
+            O(n^{-\beta+1}\ell_2(n)) & \text{if } \beta > 1.
+        \end{cases}
+    \end{equation}
+
+    Our definition of $V_n$ is 
+    \[
+        V_n = \sum_{k=0}^n u_k Q_{n-k},
+    \]
+    so the fact that $Q_n = O(n^{-\alpha+1}\ell_1(n))$ and $u_n = O(n^{-\beta}\ell_2(n))$, we get by Lemma \ref{lemma:convolution-domination} that $V_n = O(n^{-\min(\beta, \alpha-1)}\max(\ell_1(n),\ell_2(n))$. The exponent $-\min(\beta, \alpha-1)$ in the bounds of $V_n$ is strictly greater than the exponent $-\beta+1$ in the bounds of $U_n$, so we get that $V_n = o(n^{-\beta+1}\ell_2(n))$.
+
+    The argument for the term $R_n$ is similar. We know that
+    \[
+        R_n = \sum_{k=0}^n u_k r_{n-k}
+    \]
+    by definition. Furthermore, from Rogozin's original theorem (Theorem \ref{theorem:rogozin}, we know that $r_{n-k}$ is a smaller order that $Q_{n-k}$, and so by Lemma \ref{lemma:convolution-domination}, the order of $R_n$ can be no larger than the order of $V_n$.
+
+    From this, we see the dominating order is that which bounds $U_n$. Thus when $1 \leq \beta < \alpha$ we have
+    \[
+        \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu} U_n + o\left(\sum_{k=n}^\infty k^{-1}\ell_2(k)\right)
+    \]
+    when $\beta = 1$, and
+    \[
+    \left|a_n - \frac{1}{\mu}\right| = \frac{1}{\mu} U_n + o(n^{-\beta+1}\ell_2(n))
+    \]
+    when $\beta > 1$.
+\end{proof}
